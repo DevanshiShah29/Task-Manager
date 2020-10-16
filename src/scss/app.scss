@@ -1,0 +1,15 @@
+// First include Global SCSS files at top. Follow this Hierarchy exactly.
+@import "./global/variables";
+@import "./global/fonts";
+@import "./global/mixin";
+//@import "./global/reset";
+
+// Continue Including all your Page SCSS below.
+
+@import "./pages/app";
+@import "./pages/index";
+@import './pages/sidebar';
+
+
+
+
