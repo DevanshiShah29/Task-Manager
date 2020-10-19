@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import TaskList from '../Tasks/TaskList'
 
 class Dashboard extends Component {
     render() {
         return (
             <div>
-                Dashboard View
+                <TaskList/>
             </div>
         )
     }
