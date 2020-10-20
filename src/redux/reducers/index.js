@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
-import { reducer as reduxFormReducer } from 'redux-form';
+import { reducer as formReducer } from 'redux-form';
+//import  * as CRUD from './CRUDReducer'
+import CRUD from './CRUDReducer'
 
 const rootReducer = combineReducers({
-    form: reduxFormReducer,
+    list: CRUD,
+    form: formReducer,
+    currentIndex: -1
 });
 
 export default rootReducer;

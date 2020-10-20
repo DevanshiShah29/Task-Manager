@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 //import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import TaskForm from './TaskForm';
+import { connect } from 'react-redux';
+import * as actions from '../../redux/actions/TasksAction';
 
 
 class TaskList extends Component {
@@ -11,20 +13,12 @@ class TaskList extends Component {
         this.state = {
             list:this.returnList(),
             currentIndex:-1,
-            selected :[],
-            selectedValue: {
-                title: '',
-                time: '',
-                date: '',
-                category: '',
-                description: ''
-            },
-            editButtonClicked: false
+            selected :''
         };
     };
 
     returnList = () => {
-        if(localStorage.getItem('tasksToken') == null){
+        if(localStorage.getItem('tasksToken') == null) {
             localStorage.setItem('tasksToken', JSON.stringify([]))
         } 
         return JSON.parse(localStorage.getItem('tasksToken'))
@@ -42,35 +36,15 @@ class TaskList extends Component {
             list[this.state.currentIndex] = data;
         } 
         localStorage.setItem('tasksToken', JSON.stringify(list)) // update the local storage
-        this.setState({list: list, currentIndex: -1}) //update the state
+        this.setState({list, currentIndex: -1}) //update the state
     }
 
-    handleEdit = (title) => {
-        let selectedTask= this.state.list.filter(item => item.title === title);
-
-        selectedTask.map((selectedtask) => {
-            this.setState({selectedValue :{
-                title: selectedtask.title,
-                time: selectedtask.time,
-                date: selectedtask.date,
-                category: selectedtask.category,
-                description: selectedtask.description
-            },
-            editButtonClicked: !this.state.editButtonClicked
-            })
-        })
+    handleEdit = (index) => {
+        this.props.updateTaskIndex(index);
     }
 
     handleDelete = (index) => {
-        var list = this.returnList() // Retrive the list
-        if (window.confirm("Are you sure you want to delete this task?")) {
-            list.splice(index , 1)
-            localStorage.setItem('tasksToken', JSON.stringify(list))
-            this.setState({list, currentIndex:-1})
-        } else {
-            localStorage.setItem('tasksToken', JSON.stringify(list))
-            this.setState({list, currentIndex:-1})
-        }
+        this.props.deleteTask(index)
     }
 
     render() {
@@ -89,14 +63,14 @@ class TaskList extends Component {
                     </thead>
                     <tbody>
                         {
-                            this.state.list.map((task, index) => (
+                            this.props.list.map((task, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{task.title}</td>
                                     <td>{task.time} h</td>
                                     <td>
                                         <button onClick={() => this.selectedTask(index)} className="btn btn-primary mr-2">View</button>
-                                        <button onClick={() => this.handleEdit( task.title)} className="btn btn-outline-primary mr-2">Edit</button>
+                                        <button onClick={() => this.handleEdit(index)} className="btn btn-outline-primary mr-2">Edit</button>
                                         <button onClick={() => this.handleDelete(index)} className="btn btn-danger mr-2">Delete</button>
                                     </td>
                                 </tr>
@@ -109,4 +83,18 @@ class TaskList extends Component {
     }
 }
 
-export default TaskList;
+const mapStateToProps = state => {
+    console.log(state.list,"list")
+    return {
+        list: state.list
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        deleteTask : (index) => dispatch(actions.Delete(index)),
+        updateTaskIndex: (index) => dispatch(actions.UpdateIndex(index))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(TaskList);
