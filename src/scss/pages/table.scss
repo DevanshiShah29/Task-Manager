@@ -1,0 +1,90 @@
+.ReactTable{
+    .rt-tr{
+        width: 100%;
+        padding: 15px 0;
+    }
+    .rt-tr.-odd{
+        background: $white;
+    }
+    .rt-table{
+        width: 100%;
+        border: 1px solid $white;
+
+        .rt-thead{
+            box-shadow: 0 2px 15px 0 rgba(0,0,0,0.15);
+            display: flex;
+            width: 100%;
+            background: $black;
+            color: $white;
+            font-weight: 700;
+            text-transform: uppercase;
+    
+            .rt-th{
+                .rt-resizable-header-content{
+                    color: $white;
+                    position: relative;
+                    padding-left: 24px;
+                    padding-right: 24px;
+        
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        right: 55px;
+                        color: $white;
+                        font-size: 12px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                    }
+                }
+            }
+    
+            .rt-th.-sort-asc{
+                .rt-resizable-header-content{
+                    &::after {
+                        content: '(ASC)';
+                    }
+                }
+            }
+            .rt-th.-sort-desc{
+                .rt-resizable-header-content{
+                    &::after {
+                        content: '(Desc)';
+                    }
+                }
+            }
+        }
+        .rt-tbody{
+            .rt-td{
+                border-right:none;
+            }
+        }
+    }
+}
+
+.btn-danger{
+    background-color: $red !important;
+}
+
+.btn-primary{
+    background-color: $green !important;
+    border-color:$green !important; 
+}
+.btn-warning{
+    border-color:$blue !important;
+    background-color: $blue !important;
+    color:$white !important;
+}
+
+.button{
+    background: $purple;
+    color: $white;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    font-weight:600;
+    padding: 15px 15px;
+
+    &:hover{
+        opacity: 0.7;
+    }
+}

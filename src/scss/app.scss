@@ -2,7 +2,6 @@
 @import "./global/variables";
 @import "./global/fonts";
 @import "./global/mixin";
-//@import "./global/reset";
 
 // Continue Including all your Page SCSS below.
 
@@ -10,6 +9,11 @@
 @import "./pages/index";
 @import './pages/sidebar';
 @import './pages/form.scss';
+@import './pages/pagination.scss';
+@import './pages/table.scss';
+@import './pages/overlay.scss';
+@import './pages/taskList.scss';
+@import './pages/viewTask.scss';
 
 
 

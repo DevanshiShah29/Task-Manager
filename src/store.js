@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer  from './redux/reducers/index';
+//import rootReducer  from './redux/reducers/index';
 import crud from './redux/reducers/CRUDReducer'
 
 if(localStorage.getItem('tasksToken')== null)

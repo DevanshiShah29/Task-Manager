@@ -52,10 +52,10 @@ export default class Pagination extends React.Component {
   };
 
   changePage(page) {
-      if(page=='first'){
+      if(page==='first'){
           page=1;
       }
-      if(page=='last'){
+      if(page==='last'){
           page=this.props.pages;
       }
     const activePage = this.props.page + 1;
@@ -85,6 +85,7 @@ export default class Pagination extends React.Component {
     const { PageButtonComponent = defaultButton } = this.props;
     const { visiblePages } = this.state;
     const activePage = this.props.page + 1;
+    //console.log(this.state, "visiblePages" ,this.props.page +1 , "activePage" , this.props, "PageButtonComponent")
 
     return (
       <div className="Table__pagination">
@@ -98,7 +99,7 @@ export default class Pagination extends React.Component {
             }}
             disabled={activePage === 1}
           >
-            {this.props.previousText}
+          &lt;
           </PageButtonComponent>
         </div>
         <div className="Table__visiblePagesWrapper">
@@ -127,10 +128,10 @@ export default class Pagination extends React.Component {
             }}
             disabled={activePage === this.props.pages}
           >
-            {this.props.nextText}
+          &gt;
           </PageButtonComponent>
         </div>
-        <button className="previous-arrow" onClick={this.changePage.bind(null,'last')} disabled={activePage === this.props.pages}>»</button>
+        <button className="next-arrow" onClick={this.changePage.bind(null,'last')} disabled={activePage === this.props.pages}>»</button>
       </div>
     );
   }

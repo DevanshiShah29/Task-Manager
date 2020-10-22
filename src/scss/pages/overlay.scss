@@ -1,0 +1,10 @@
+.ReactModal__Overlay--after-open{
+    background: rgba(0, 0, 1, 0.8)!important;
+  }
+  
+.ReactModal__Content--after-open{
+    top:50px !important;
+    left:350px !important;
+    right:350px !important;
+    bottom:50px !important;
+}

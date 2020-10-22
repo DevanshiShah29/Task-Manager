@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-//import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import TaskForm from './TaskForm';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/TasksAction';
-
+import ReactTable from 'react-table';
+import "react-table/react-table.css";  
+import Pagination from "../../Pagination";
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
+import Modal from 'react-modal';
 
 class TaskList extends Component {
     //In case of new transaction current index would be -1 otherwise it would be index of that data
@@ -13,7 +18,8 @@ class TaskList extends Component {
         this.state = {
             list:this.returnList(),
             currentIndex:-1,
-            selected :''
+            selected :'',
+            openPopup : false
         };
     };
 
@@ -41,43 +47,114 @@ class TaskList extends Component {
 
     handleEdit = (index) => {
         this.props.updateTaskIndex(index);
+        this.setState({ openPopup : true })
     }
 
     handleDelete = (index) => {
         this.props.deleteTask(index)
     }
 
+    handlePopup = () => {
+        this.setState({ openPopup : true })
+    }
+
+    handleView = (index) => {
+        console.log("view", index)
+        this.props.updateTaskIndex(index);
+    }
+
+    globalFilter = (input) => {
+        let filteredData = this.props.list.filter((value) => {
+            return (
+                value.title.toLowerCase().includes(input.toLowerCase()) ||
+                value.time.toString().toLowerCase().includes(input.toLowerCase()) ||
+                value.description.toLowerCase().includes(input.toLowerCase()) ||
+                value.date.toString().toLowerCase().includes(input.toLowerCase()) ||
+                value.category.toLowerCase().includes(input.toLowerCase())
+            );
+        });
+        console.log(filteredData,"filtered data")
+    };
+
+    handleChange = e => {
+        this.globalFilter(e.target.value )
+    }
+
+    apiData = this.props.list;
+    
+    columns = [
+        {
+            Header:'No.',
+            accessor:'index',
+            sortable:true,
+        },
+        {
+            Header:'Task',
+            accessor:'title',
+            sortable:true
+        },
+        {
+            Header:'Date',
+            accessor:'date',
+            sortable:true
+        },
+        {
+            Header:'Time',
+            accessor:'time',
+            className: "thead-dark",
+            headerClassName: "thead-dark",
+            sortable:true,
+        },
+        {
+            Header:'Actions',
+            accessor: "Action",
+            className: "td_action action-td",
+            filterable: false,
+            sortable:false,
+            headerClassName: "action-th",
+            Cell: ({index}) => (
+                <>
+                    <Link onClick={() => this.handleView(index)} to={`tasks/view/${index}`} className="btn btn-primary mr-2"><AiIcons.AiFillEye/></Link>
+                    <button onClick={() => this.handleEdit(index)} className="btn btn-warning mr-2"><FaIcons.FaEdit/></button>
+                    <button onClick={() => this.handleDelete(index)} className="btn btn-danger mr-2"><AiIcons.AiFillDelete/></button>  
+                </>
+            )
+        }
+    ]
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.currentIndex !== this.props.currentIndex || prevProps.list.length !== this.props.list.length) {
+            this.apiData = this.props.list;
+        }
+    }
+
     render() {
         return (
             <>
-                <TaskForm onAddOrEdit={this.onAddOrEdit} currentIndex={this.state.currentIndex} list={this.state.list} selectedValue={this.state.selectedValue} editButtonClicked={this.state.editButtonClicked}/>
-
-                <table className="table border shadow">
-                    <thead className="thead-dark">
-                        <tr>
-                            <th scope="col">No.</th>
-                            <th scope="col">Task</th>
-                            <th scope="col">Time</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.props.list.map((task, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{task.title}</td>
-                                    <td>{task.time} h</td>
-                                    <td>
-                                        <button onClick={() => this.selectedTask(index)} className="btn btn-primary mr-2">View</button>
-                                        <button onClick={() => this.handleEdit(index)} className="btn btn-outline-primary mr-2">Edit</button>
-                                        <button onClick={() => this.handleDelete(index)} className="btn btn-danger mr-2">Delete</button>
-                                    </td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
+                {
+                    this.state.openPopup ? 
+                    <Modal isOpen={true} onRequestClose={() => this.setState({ openPopup: false})}>
+                        <TaskForm onAddOrEdit={this.onAddOrEdit} currentIndex={this.state.currentIndex} list={this.state.list}/>
+                    </Modal>
+                    :null
+                }
+                {
+                    console.log(this.apiData, "data passed in react table")
+                }
+                <div className="taskListHeader"> 
+                    <h2>Task List </h2>
+                    <button onClick={() => this.handlePopup()} className="button">Add Task</button> 
+                    <div className="search_container">
+                        <input onChange={this.handleChange} placeholder="Search" className="search" label="Search" type="search"/>
+                        <AiIcons.AiOutlineSearch/>
+                    </div>
+                </div>
+                <ReactTable
+                    data={this.apiData}  
+                    columns={this.columns} 
+                    defaultPageSize={5} 
+                    PaginationComponent={Pagination}
+                />
             </>
         )
     }

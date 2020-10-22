@@ -1,7 +1,7 @@
-const initialState = { 
-    list: JSON.parse(localStorage.getItem('tasksToken')),
-    currentIndex: -1
-};
+// const initialState = { 
+//     list: JSON.parse(localStorage.getItem('tasksToken')),
+//     currentIndex: -1
+// };
 
 const CRUDReducer = (state = '', action) => {
     var list = JSON.parse(localStorage.getItem('tasksToken'));
