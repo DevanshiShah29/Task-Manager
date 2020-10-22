@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 //import rootReducer  from './redux/reducers/index';
 import crud from './redux/reducers/CRUDReducer'
 
-if(localStorage.getItem('tasksToken')== null)
+if (localStorage.getItem('tasksToken') == null)
   localStorage.setItem('tasksToken', JSON.stringify([]))
 
 const initialState = {
@@ -13,10 +13,10 @@ const initialState = {
 
 const middleware = [thunk];
 
-const store = createStore( crud, initialState , compose(
-    applyMiddleware(...middleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()) 
+const store = createStore(crud, initialState, compose(
+  applyMiddleware(...middleware),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 );
-console.log(store,"store");
+console.log(store, "store");
 console.log(initialState);
 export default store;

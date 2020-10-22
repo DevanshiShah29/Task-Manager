@@ -2,6 +2,7 @@
     .rt-tr{
         width: 100%;
         padding: 15px 0;
+        text-align:center;
     }
     .rt-tr.-odd{
         background: $white;
@@ -23,8 +24,6 @@
                 .rt-resizable-header-content{
                     color: $white;
                     position: relative;
-                    padding-left: 24px;
-                    padding-right: 24px;
         
                     &::after {
                         content: '';
