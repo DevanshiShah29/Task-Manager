@@ -1,0 +1,105 @@
+.view_screen{
+    .header{
+        padding:20px;
+        
+        
+        .back, .title{
+            width: auto;
+            display: inline-block;
+        }
+
+        .back{
+            font-size:20px;
+            font-weight:600;
+            color:$black;
+            margin-left:20px;
+        }
+
+        .title{
+            text-align:center;
+            width:90%;
+            margin-top:5px;
+        }
+    }
+
+    .view_body{
+        width:50%;
+        margin:0 auto;
+        
+        .title_container{
+
+            .task_title,.cat_image{
+                width:50%;
+                display:inline-block;
+                padding: 20px;
+            }
+
+            .task_title{
+                color:$black;
+                font-weight: 500;
+                font-size:30px;
+            }
+        }
+    }
+
+    .category_container{
+        margin:15px 0;
+
+        .work, .home, .other{
+            color:$white;
+            width:auto;
+            padding: 5px 20px;
+            display:inline-block;
+            margin: 5px;
+            border-radius: 20px;
+            font-weight:500;
+            opacity:0.8;
+            cursor:not-allowed;
+            transition: 0.3s ease-in-out;
+        }
+
+        .work.active, .home.active, .other.active{
+            opacity:1;
+            font-weight:600;
+            cursor:pointer;
+
+            &:hover{
+                transform: scale(1.08);
+            }
+        }
+
+        .work{
+            background:$blue;
+        }
+        .other{
+            background:$pink;
+        }
+        .home{
+            background:$green;
+        }
+    }
+
+    .date_time_container{
+        margin:10px 0;
+        .time, .date{
+            display:inline-block;
+            width:50%;
+            padding:5px;
+            font-size: 16px;
+            font-weight:600;
+
+            svg{
+                margin-top:-2px;
+                margin-right:2px;
+            }
+        }
+
+        .date{
+            text-align: end;
+        }
+    }
+
+    .description{
+        margin:10px 0;
+    }
+}
