@@ -31,7 +31,6 @@ class ViewTask extends Component {
 
     shouldComponentUpdate(prevProps) {
         if (prevProps.currentIndex !== this.props.currentIndex || prevProps.list.length !== this.props.list.length) {
-            console.log('component updated');
             this.setState({ ...this.returnStateObject() });
             return true;
         }
@@ -62,7 +61,7 @@ class ViewTask extends Component {
                     </Link>
                     <h2 className="title">Daily Task</h2>
                 </div>
-                <div className={`view_body `}>
+                <div className="view_body">
                     <div className="title_container">
                         {
                             this.state.category === 'work' || this.state.category === ''
@@ -82,15 +81,14 @@ class ViewTask extends Component {
                         <h2 className="task_title">{this.state.title}</h2>
                     </div>
                     <div className="category_container">
-
                         {
-                            this.state.category === 'work' || this.state.category === '' ? <div className="work active">Work</div> : <div className="work">Work</div>
+                            this.state.category === 'work' || this.state.category === '' ? <Link to={{ pathname: '/reports/work', state: { category: 'work'} }} className="work active">Work</Link> : <div className="work">Work</div>
                         }
                         {
-                            this.state.category === 'home' ? <div className="home active">Home</div> : <div className="home">Home</div>
+                            this.state.category === 'home' ? <Link to={{ pathname: '/reports/home', state: { category: 'home'} }} className="home active">Home</Link> : <div className="home">Home</div>
                         }
                         {
-                            this.state.category === 'other' ? <div className="other active">Other</div> : <div className="other">Other</div>
+                            this.state.category === 'other' ? <Link to={{ pathname: '/reports/other', state: { category: 'other'} }} className="other active">Other</Link> : <div className="other">Other</div>
                         }
                     </div>
                     <div className="date_time_container">

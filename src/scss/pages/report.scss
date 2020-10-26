@@ -1,0 +1,109 @@
+.main-title{
+    .header{
+        padding:20px;
+        
+        .back, .title{
+            width: auto;
+            display: inline-block;
+        }
+
+        .back{
+            font-size:20px;
+            font-weight:600;
+            color:$black;
+            margin-left:20px;
+        }
+
+        .title{
+            text-align:center;
+            width:90%;
+            margin-top:5px;
+        }
+    }
+
+    .tabs{
+        text-align: center;
+        button{
+            padding:20px;
+            margin: 0 30px;
+            color:$black;
+            font-weight:500;
+            border:none;
+            outline:none;
+            background:none;
+
+            &:hover{
+                text-decoration:none;
+            }
+
+            &.active {
+                background-color: $purple;
+                border-radius: 60px;
+                padding: 10px 30px;
+                color: $white;
+            }
+        }
+    }
+    h2{
+        text-align:center;
+        margin:20px;
+    }
+    .chart{
+        width:60%;
+        display:inline-block;
+        float:left;
+    }
+    
+    .right-data{
+        width:40%;
+        display:inline-block;
+    
+        .card-parent{
+            transition:ease-in-out 0.5s;
+            margin: 15px ;
+            padding: 25px 40px;
+            border-radius: 20px;
+    
+            .task-title{
+                font-size:20px;
+                font-weight: 500;
+                display:inline-block;
+                width:75%;
+            }
+    
+            .task-date{
+                display:inline-block;
+                text-align: right;
+                width:25%;
+            }
+    
+            .task-time{
+                font-weight: 500;
+                font-size:12px;
+            }
+    
+            .task-description{
+                span{
+                    font-weight: 500;
+                    font-size:14px;
+                }
+                font-size:14px;
+            }
+    
+            &:hover{
+                box-shadow: 0 8px 20px -10px ;
+            }
+        }
+    
+        .card-parent.other{
+            background-color: rgba(251,139,204,0.2);
+        }
+        .card-parent.work{
+            background-color: rgba(113,182,249,0.2);
+        }
+        .card-parent.home{
+            background-color: rgba(46,196,105,0.2);
+        }
+        
+    }
+}
