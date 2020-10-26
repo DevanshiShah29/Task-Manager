@@ -39,6 +39,7 @@ class TaskForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        this.props.closeModalHandler();
         //this.props.onAddOrEdit(this.state);
         if (this.props.currentIndex === -1) {
             this.props.insertTask(this.state)
@@ -52,7 +53,7 @@ class TaskForm extends Component {
         return (
             <div className="form_container">
                 <h1>Tasks</h1>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} >
                     <div className="form-group">
                         <input
                             name="title"
@@ -93,6 +94,7 @@ class TaskForm extends Component {
                             onChange={this.handleInputChange}
                             //type="select"
                         >
+                            <option value="">Select</option>
                             <option value="work">Work</option>
                             <option value="home">Home</option>
                             <option value="other">Other</option>
