@@ -92,7 +92,6 @@ class TaskList extends Component {
             Header:'Task',
             accessor:'title',
             sortable:true
-            
         },
         {
             Header:'Date',
@@ -170,6 +169,7 @@ class TaskList extends Component {
     }
 }
 
+//display data
 const mapStateToProps = state => {
     console.log(state.list,"list")
     return {
@@ -178,6 +178,7 @@ const mapStateToProps = state => {
     }
 }
 
+//updates data
 const mapDispatchToProps = (dispatch) => {
     return{
         deleteTask : (index) => dispatch(actions.Delete(index)),
