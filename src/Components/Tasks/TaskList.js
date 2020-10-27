@@ -59,7 +59,6 @@ class TaskList extends Component {
     }
 
     handleView = (index) => {
-        console.log("view", index)
         this.props.updateTaskIndex(index);
     }
 
@@ -79,14 +78,15 @@ class TaskList extends Component {
     handleChange = e => {
         this.globalFilter(e.target.value )
     }
-
-    apiData = this.props.list;
     
     columns = [
         {
             Header:'No.',
-            accessor:'index',
             sortable:true,
+            id: 'row',
+            Cell: (row) => {
+                return <div>{row.index + 1}</div>;
+            }
         },
         {
             Header:'Task',
@@ -104,6 +104,10 @@ class TaskList extends Component {
             className: "thead-dark",
             headerClassName: "thead-dark",
             sortable:true,
+            Cell: (props) => {
+                //console.log(props)
+                return <div>{props.value === '1' ? props.value+ " Hour" : props.value+ " Hours"}</div>;
+            }
         },
         {
             Header:'Actions',
@@ -122,10 +126,15 @@ class TaskList extends Component {
         }
     ]
 
+    apiData = this.props.list;
     componentDidUpdate(prevProps) {
         if (prevProps.currentIndex !== this.props.currentIndex || prevProps.list.length !== this.props.list.length) {
             this.apiData = this.props.list;
         }
+    }
+
+    closeModalHandler = () =>{
+        this.setState({openPopup: false});
     }
 
     render() {
@@ -133,13 +142,13 @@ class TaskList extends Component {
             <>
                 {
                     this.state.openPopup ? 
-                    <Modal isOpen={true} onRequestClose={() => this.setState({ openPopup: false})}>
-                        <TaskForm onAddOrEdit={this.onAddOrEdit} currentIndex={this.state.currentIndex} list={this.state.list}/>
+                    <Modal isOpen={true} onRequestClose={() => this.setState({ openPopup: false})} ariaHideApp={false}>
+                        <div className="button-container">
+                            <button className="close-button" onClick={() => this.setState({ openPopup: false})}>X</button>
+                        </div>
+                        <TaskForm onAddOrEdit={this.onAddOrEdit} closeModalHandler={this.closeModalHandler} currentIndex={this.state.currentIndex} list={this.state.list} />
                     </Modal>
                     :null
-                }
-                {
-                    console.log(this.apiData, "data passed in react table")
                 }
                 <div className="taskListHeader"> 
                     <h2>Task List </h2>
@@ -150,7 +159,7 @@ class TaskList extends Component {
                     </div>
                 </div>
                 <ReactTable
-                    data={this.apiData}  
+                    data={this.props.list}  
                     columns={this.columns} 
                     defaultPageSize={5} 
                     PaginationComponent={Pagination}
@@ -160,13 +169,16 @@ class TaskList extends Component {
     }
 }
 
+//display data
 const mapStateToProps = state => {
     console.log(state.list,"list")
     return {
-        list: state.list
+        list: state.list,
+        ...state
     }
 }
 
+//updates data
 const mapDispatchToProps = (dispatch) => {
     return{
         deleteTask : (index) => dispatch(actions.Delete(index)),
