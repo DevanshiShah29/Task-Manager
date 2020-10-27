@@ -96,6 +96,10 @@
 
         .date{
             text-align: end;
+            a{
+                color:$black;
+                text-decoration: none;
+            }
         }
     }
 

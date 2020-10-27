@@ -7,6 +7,8 @@ class AllTaskList extends Component {
     
     componentWillMount(){
         this.getAllData();
+        this.getCurrentDate();
+        this.countDays();
     }
 
     getAllData(){
@@ -22,6 +24,24 @@ class AllTaskList extends Component {
         }).filter(filtered => filtered !== undefined)
     }
 
+    getCurrentDate(separator=','){
+        let newDate = new Date()
+        let date = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+        
+        return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+    }
+
+    countDays = (day) => {
+        const oneDay = 24 * 60 * 60 * 1000;
+        const firstDate = new Date(this.getCurrentDate());
+        const secondDate = new Date(`${day}`.replace("-", ","));
+
+        return Math.round(Math.abs((firstDate - secondDate) / oneDay));
+        //console.log(diffDays, this.getCurrentDate())
+    }
+
     render() {
         return (
             <div className="right-data">
@@ -31,7 +51,7 @@ class AllTaskList extends Component {
                         return <div className={`card-parent ${data.category}`} key={id}>
                                 <span className="tag"></span>
                                 <div className="task-title">{data.title}</div>
-                                <div className="task-date">{data.date}</div>
+                                <div className="task-date">{this.countDays(data.date) === 1 ? this.countDays(data.date)+' day ago' : this.countDays(data.date)+` days ago`}</div>
                                 <div className="task-time">{data.time} Hours</div>
                                 <div className="task-description"><span>Summary: </span>{data.description}</div>
                             </div>
