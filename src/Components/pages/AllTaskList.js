@@ -51,7 +51,12 @@ class AllTaskList extends Component {
                         return <div className={`card-parent ${data.category}`} key={id}>
                                 <span className="tag"></span>
                                 <div className="task-title">{data.title}</div>
-                                <div className="task-date">{this.countDays(data.date) === 1 ? this.countDays(data.date)+' day ago' : this.countDays(data.date)+` days ago`}</div>
+                                <div className="task-date">
+                                    {     this.countDays(data.date) === 1 ? this.countDays(data.date)+' day ago' 
+                                        : this.countDays(data.date) === 0 ? 'Today'
+                                        : this.countDays(data.date)+` days ago`
+                                    }
+                                </div>
                                 <div className="task-time">{data.time} Hours</div>
                                 <div className="task-description"><span>Summary: </span>{data.description}</div>
                             </div>
@@ -63,7 +68,7 @@ class AllTaskList extends Component {
 }
 const mapStateToProps = (state, props) => {
     return {
-        list: state.list,
+        list: state.CRUDReducer.list,
         ...state,
         ...props
     }

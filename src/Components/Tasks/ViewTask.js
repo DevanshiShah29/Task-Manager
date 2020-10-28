@@ -106,8 +106,8 @@ class ViewTask extends Component {
 
 const mapStateToProps = state => {
     return {
-        list: state.list,
-        currentIndex: state.currentIndex
+        list: state.CRUDReducer.list,
+        currentIndex: state.CRUDReducer.currentIndex
     }
 }
 

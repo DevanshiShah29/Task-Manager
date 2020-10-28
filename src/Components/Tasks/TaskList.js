@@ -158,8 +158,9 @@ class TaskList extends Component {
                         <AiIcons.AiOutlineSearch/>
                     </div>
                 </div>
+                {console.log(this.props.list, this.apiData)}
                 <ReactTable
-                    data={this.props.list}  
+                    data={ this.apiData}  
                     columns={this.columns} 
                     defaultPageSize={5} 
                     PaginationComponent={Pagination}
@@ -171,10 +172,11 @@ class TaskList extends Component {
 
 //display data
 const mapStateToProps = state => {
-    console.log(state.list,"list")
+    console.log(state.CRUDReducer.list,"list")
     return {
-        list: state.list,
-        ...state
+        list: state.CRUDReducer.list,
+        currentIndex: state.CRUDReducer.currentIndex,
+        ...state.CRUDReducer
     }
 }
 

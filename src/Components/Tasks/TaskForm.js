@@ -119,10 +119,11 @@ class TaskForm extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state.list, "list", state) 
+    //console.log(state.CRUDReducer.list, "list", state) 
     return {
-        list: state.list,
-        currentIndex: state.currentIndex
+        list: state.CRUDReducer.list,
+        currentIndex: state.CRUDReducer.currentIndex,
+        ...state.CRUDReducer
     }
 }
 
