@@ -17,20 +17,20 @@ export const SidebarData = [
       cName: 'nav-text'
     },
     {
-      title: 'Calender',
-      path: '/calender',
+      title: 'Calendar',
+      path: '/calendar',
       icon: <AiIcons.AiFillCalendar />,
       cName: 'nav-text'
     },
+    // {
+    //   title: 'Team',
+    //   path: '/team',
+    //   icon: <IoIcons.IoMdPeople />,
+    //   cName: 'nav-text'
+    // },
     {
-      title: 'Team',
-      path: '/team',
-      icon: <IoIcons.IoMdPeople />,
-      cName: 'nav-text'
-    },
-    {
-      title: 'Messages',
-      path: '/messages',
+      title: 'About',
+      path: '/about',
       icon: <FaIcons.FaEnvelopeOpenText />,
       cName: 'nav-text'
     },

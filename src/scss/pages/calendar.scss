@@ -1,0 +1,129 @@
+.calendar-container {
+    display: flex;
+    min-height: 100%;
+    font-size: 14px;
+
+    h2 {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0 0 0 15px;
+    }
+
+    li {
+        margin: 15px 0;
+        padding: 0;
+    }
+
+    b {
+        margin-right: 3px;
+    }
+
+    .calendar-sidebar {
+        width: 250px;
+        line-height: 1.5;
+        background: rgba(161, 122, 255, 0.2);
+        border-right: 1px solid rgba(161, 122, 255, 0.5);
+
+        .calendar-sidebar-section {
+            padding: 20px;
+        }
+    }
+
+    .fc {
+        max-width: 1100px;
+        width: 950px;
+        padding: 50px 20px;
+        margin: 0 auto;
+
+        a{
+            padding: 11px 7px;
+            color: rgba(52,40,104,.8);
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .fc-button{
+            padding:12px 19px;
+            font-weight:700;
+            text-transform: uppercase;
+        }
+
+        .fc-button-primary {
+            background-color:$black;
+            border-color:$black ;
+
+            &:not(:disabled):active:focus{
+                box-shadow: none;
+                background-color: $purple;
+                border-color: $purple;
+            }
+
+            &:focus{
+                box-shadow:none;
+                background-color: $purple;
+                border-color: $purple;
+            }
+        }
+
+        .fc-button-primary:not(:disabled).fc-button-active:focus {
+            box-shadow: none;
+            background-color: $purple;
+            border-color: $purple;
+        }
+
+        .fc-col-header {
+            tbody{
+                //color:$black;
+
+                .fc-col-header-cell-cushion {
+                    color:$black;
+                    font-weight:600;
+                    text-decoration:none;
+                }
+            }
+        }
+
+        .fc-daygrid-day-frame{
+            height:140px;
+        }
+
+        .fc-daygrid-event-harness{
+            .work{
+                background: rgba(113,182,249,0.2);
+                //color:$blue;
+            }
+            .home{
+                background: rgba(46,196,105,0.2);
+                //color:$green;
+            }
+            .other{
+                background: rgba(251,139,204,0.2);
+                //color:$pink;
+            }
+            .fc-daygrid-event{
+                padding:3px;
+            }
+        }
+
+        .fc-toolbar.fc-header-toolbar {
+            margin-bottom: 20px;
+        }
+
+        .fc-view-harness {
+            flex-grow: 0;
+            position: relative;
+        }
+
+        .fc-event-time{
+            display:none;
+        }
+
+        .fc-daygrid-day.fc-day-today{
+            background-color: rgba(236,228,255,.5) ;
+        }
+    }
+}

@@ -1,0 +1,48 @@
+.pagination-bottom{
+    .Table__pagination{
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px 10px;
+        margin: 50px 20px 0 0;
+        float: right;
+        background-color: $white;
+        border-radius: 20px;
+
+        .previous-arrow, .next-arrow{
+            font-size: 25px;
+            cursor: pointer;
+            color: $black;
+            outline: none;
+            border: none;
+            background:$white;
+            margin-top:-3px;
+
+            &:disabled {
+                font-size: 25px;
+                cursor: not-allowed;
+                color: gray;
+                outline: none;
+                border: none;
+                background:$white;
+            }
+        }
+
+        button{
+            background-color: $white;
+            color: $black;
+            border-radius: 6px;
+            margin: 5px;
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 2px 11px;
+            border:1px solid $white;
+            outline:none;
+        }
+
+        .Table__visiblePagesWrapper .Table__pageButton--active{
+            color: $white;
+            background-color:$purple;
+            font-weight:500;
+        }
+    }
+}
