@@ -26,7 +26,7 @@
         width: 250px;
         line-height: 1.5;
         background: rgba(161, 122, 255, 0.2);
-        border-right: 1px solid $purple;
+        border-right: 1px solid rgba(161, 122, 255, 0.5);
 
         .calendar-sidebar-section {
             padding: 20px;
@@ -106,10 +106,6 @@
             }
             .fc-daygrid-event{
                 padding:3px;
-                
-                .fc-event-title{
-
-                }
             }
         }
 

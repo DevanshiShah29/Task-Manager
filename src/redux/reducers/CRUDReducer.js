@@ -1,39 +1,41 @@
-// const initialState = { 
-//     list: JSON.parse(localStorage.getItem('tasksToken')),
-//     currentIndex: -1
-// };
+const initialState = { 
+    list: JSON.parse(localStorage.getItem('tasksToken')),
+    currentIndex: -1
+};
 
-const CRUDReducer = (state = '', action) => {
-    var list = JSON.parse(localStorage.getItem('tasksToken'));
-    console.log(list,"list inside reducer", state.currentIndex);
+const CRUDReducer = (state = initialState, action) => {
+    console.log(state.list,"state.list inside reducer", state.currentIndex);
     switch (action.type) {
         
         case "INSERT":
-            list.push(action.payload)
-            localStorage.setItem('tasksToken', JSON.stringify(list))
-            return { list, currentIndex: -1 } 
+            state.list.push(action.payload)
+            localStorage.setItem('tasksToken', JSON.stringify(state.list))
+            state.currentIndex = -1
+            return { ...state }
 
         case "UPDATE":
-            list[state.currentIndex] = action.payload
-            localStorage.setItem('tasksToken', JSON.stringify(list))
-            return { list, currentIndex: -1 }
+            state.list[state.currentIndex] = action.payload
+            localStorage.setItem('tasksToken', JSON.stringify(state.list))
+            state.currentIndex = -1
+            return { ...state }
 
         case "DELETE":
             if (window.confirm("Are you sure you want to delete this task?")) {
-                list.splice(action.payload , 1)
-                localStorage.setItem('tasksToken', JSON.stringify(list))
-                return { list, currentIndex: -1 }
+                state.list.splice(action.payload , 1)
+                localStorage.setItem('tasksToken', JSON.stringify(state.list))
+                state.currentIndex = -1
+                return { ...state }
             } else {
-                localStorage.setItem('tasksToken', JSON.stringify(list))
-                return { list, currentIndex: -1 }
+                localStorage.setItem('tasksToken', JSON.stringify(state.list))
+                state.currentIndex = -1
+                return { ...state }
             }
         case "UPDATE-INDEX":
-            return { list, currentIndex: action.payload }
+            state.currentIndex = action.payload
+            return { ...state }
 
         default:
-            return {
-                ...state
-            }
+            return { ...state }
     }
 }
 

@@ -94,7 +94,6 @@ class Calendar extends Component {
                     //weekNumbers= 'true'
                     dayMaxEvents={2}// allow "more" link when too many events
                     height='auto'
-                    eventLimit={true}
                     events={
                         this.props.list.map((obj) => {
                             return {
@@ -113,10 +112,9 @@ class Calendar extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state.list, "list")
     return {
-        list: state.list,
-        ...state
+        list: state.CRUDReducer.list,
+        ...state.CRUDReducer
     }
 }
 

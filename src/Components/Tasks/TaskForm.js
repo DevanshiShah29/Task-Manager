@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-//import { Field, reduxForm } from "redux-form";
-//import renderField from '../RenderField';
+import { Field, reduxForm } from "redux-form";
+import renderField from '../RenderField';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/TasksAction';
 
@@ -49,6 +49,11 @@ class TaskForm extends Component {
         }
     }
 
+    required = (value) =>{
+        return value || typeof value === "number" ? undefined : "Required";
+    }
+        
+
     render() {
         return (
             <div className="form_container">
@@ -63,6 +68,9 @@ class TaskForm extends Component {
                             //value={this.props.selectedValue.title === '' ? this.state.title : this.props.selectedValue.title }
                             onChange={this.handleInputChange}
                             value={this.state.title}
+                            validate={this.required}
+                            label="Task:"
+                            component={renderField}
                         />
                     </div>
                     <div className="form-group">
@@ -73,6 +81,8 @@ class TaskForm extends Component {
                             placeholder="Time Taken"
                             value={this.state.time}
                             onChange={this.handleInputChange}
+                            validate={this.required}
+                            component={renderField}
                         />
                     </div>
                     <div className="form-group">
@@ -83,6 +93,8 @@ class TaskForm extends Component {
                             placeholder="Date"
                             value={this.state.date}
                             onChange={this.handleInputChange}
+                            validate={this.required}
+                            component={renderField}
                         />
                     </div>
                     <div className="form-group">
@@ -92,6 +104,8 @@ class TaskForm extends Component {
                             placeholder="Select Category"
                             value={this.state.category}
                             onChange={this.handleInputChange}
+                            validate={this.required}
+                            component={renderField}
                             //type="select"
                         >
                             <option value="">Select</option>
@@ -108,6 +122,8 @@ class TaskForm extends Component {
                             placeholder="Description"
                             value={this.state.description}
                             onChange={this.handleInputChange}
+                            validate={this.required}
+                            component={renderField}
                         />
                     </div>
 
@@ -119,10 +135,11 @@ class TaskForm extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state.list, "list", state) 
+    //console.log(state.CRUDReducer.list, "list", state) 
     return {
-        list: state.list,
-        currentIndex: state.currentIndex
+        list: state.CRUDReducer.list,
+        currentIndex: state.CRUDReducer.currentIndex,
+        ...state.CRUDReducer
     }
 }
 
@@ -133,8 +150,10 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-// TaskForm = reduxForm({
-//     form: 'TaskEditAndAdd'
-// })(TaskForm);
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+    reduxForm({
+        form: 'TaskEditAndAdd'
+    })(TaskForm)
+);

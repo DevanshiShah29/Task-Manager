@@ -133,6 +133,15 @@ class TaskList extends Component {
         }
     }
 
+    shouldComponentUpdate(prevProps, prevState){
+        if(prevProps.list || this.props.list 
+            !== prevProps.list){
+                this.apiData= this.props.list
+                return true;
+            }
+        return false;
+    }
+
     closeModalHandler = () =>{
         this.setState({openPopup: false});
     }
@@ -158,6 +167,8 @@ class TaskList extends Component {
                         <AiIcons.AiOutlineSearch/>
                     </div>
                 </div>
+                
+                {console.log(this.props.list, this.apiData, this.state.list)}
                 <ReactTable
                     data={this.props.list}  
                     columns={this.columns} 
@@ -171,10 +182,11 @@ class TaskList extends Component {
 
 //display data
 const mapStateToProps = state => {
-    console.log(state.list,"list")
+    console.log(state.CRUDReducer.list,"list")
     return {
-        list: state.list,
-        ...state
+        list: state.CRUDReducer.list,
+        currentIndex: state.CRUDReducer.currentIndex,
+        ...state.CRUDReducer
     }
 }
 

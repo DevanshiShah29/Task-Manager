@@ -93,7 +93,7 @@ class ViewTask extends Component {
                     </div>
                     <div className="date_time_container">
                         <div className="time"><AiIcons.AiOutlineClockCircle />  {this.state.time} Hours</div>
-                        <div className="date"><FaIcons.FaRegCalendarAlt />  {this.state.date}</div>
+                        <div className="date"><Link to='/calendar'><FaIcons.FaRegCalendarAlt />  {this.state.date}</Link></div>
                     </div>
                     <div className="description">
                         <p>{this.state.description}</p>
@@ -106,8 +106,8 @@ class ViewTask extends Component {
 
 const mapStateToProps = state => {
     return {
-        list: state.list,
-        currentIndex: state.currentIndex
+        list: state.CRUDReducer.list,
+        currentIndex: state.CRUDReducer.currentIndex
     }
 }
 

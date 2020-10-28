@@ -22,9 +22,9 @@ const renderField = ({ input, label, type, asterisk, meta: { touched, error }, c
         return (
             <>
                 <label>{label}{asterisk ? <span className="star-mandatory">*</span> : ''}</label>
-                <div className={selectWrapperClass}>
-                    {fieldType}
-                </div>
+                    <div className={selectWrapperClass}>
+                        {fieldType}
+                    </div>
                 {touched && error &&
                     <span className="text-danger">{error}</span>
                 }
@@ -35,9 +35,9 @@ const renderField = ({ input, label, type, asterisk, meta: { touched, error }, c
         return (
             <>
                 <label>{label}{asterisk ? <span className="star-mandatory">*</span> : ''}</label>
-                <span>
-                    {fieldType}
-                </span>
+                    <span>
+                        {fieldType}
+                    </span>
                 {touched && error &&
                     <span className="text-danger">{error}</span>
                 }

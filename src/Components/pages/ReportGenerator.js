@@ -97,7 +97,7 @@ class ReportGenerator extends Component {
  
 const mapStateToProps = state => {
     return {
-        list: state.list
+        list: state.CRUDReducer.list
     }
 }
 export default connect(mapStateToProps)(ReportGenerator);

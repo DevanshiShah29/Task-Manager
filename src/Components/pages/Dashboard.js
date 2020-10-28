@@ -4,7 +4,7 @@ import TaskList from '../Tasks/TaskList'
 class Dashboard extends Component {
     render() {
         return (
-            <div>
+            <div className="dashboard">
                 <TaskList/>
             </div>
         )
