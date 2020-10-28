@@ -39,7 +39,6 @@ class AllTaskList extends Component {
         const secondDate = new Date(`${day}`.replace("-", ","));
 
         return Math.round(Math.abs((firstDate - secondDate) / oneDay));
-        //console.log(diffDays, this.getCurrentDate())
     }
 
     render() {

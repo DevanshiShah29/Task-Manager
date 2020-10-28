@@ -133,6 +133,15 @@ class TaskList extends Component {
         }
     }
 
+    shouldComponentUpdate(prevProps, prevState){
+        if(prevProps.list || this.props.list 
+            !== prevProps.list){
+                this.apiData= this.props.list
+                return true;
+            }
+        return false;
+    }
+
     closeModalHandler = () =>{
         this.setState({openPopup: false});
     }
@@ -158,9 +167,10 @@ class TaskList extends Component {
                         <AiIcons.AiOutlineSearch/>
                     </div>
                 </div>
-                {console.log(this.props.list, this.apiData)}
+                
+                {console.log(this.props.list, this.apiData, this.state.list)}
                 <ReactTable
-                    data={ this.apiData}  
+                    data={this.props.list}  
                     columns={this.columns} 
                     defaultPageSize={5} 
                     PaginationComponent={Pagination}
