@@ -1,12 +1,13 @@
-const initialState = { 
+import update from 'react-addons-update';
+const initialState = {
     list: JSON.parse(localStorage.getItem('tasksToken')),
     currentIndex: -1
 };
 
 const CRUDReducer = (state = initialState, action) => {
-    console.log(state.list,"state.list inside reducer", state.currentIndex);
+    console.log(state.list, "state.list inside reducer", state.currentIndex);
     switch (action.type) {
-        
+
         case "INSERT":
             state.list.push(action.payload)
             localStorage.setItem('tasksToken', JSON.stringify(state.list))
@@ -21,10 +22,14 @@ const CRUDReducer = (state = initialState, action) => {
 
         case "DELETE":
             if (window.confirm("Are you sure you want to delete this task?")) {
-                state.list.splice(action.payload , 1)
+                //state.list.splice(action.payload , 1)
+                console.log(action.payload, "delete reducer");
                 localStorage.setItem('tasksToken', JSON.stringify(state.list))
-                state.currentIndex = -1
-                return { ...state }
+                //state.currentIndex = -1
+                return update(state, {
+                    list: { $splice: [[action.payload, 1]] },
+                    currentIndex: { $set: -1 }
+                });
             } else {
                 localStorage.setItem('tasksToken', JSON.stringify(state.list))
                 state.currentIndex = -1

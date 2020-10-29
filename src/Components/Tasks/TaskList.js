@@ -19,7 +19,8 @@ class TaskList extends Component {
             list:this.returnList(),
             currentIndex:-1,
             selected :'',
-            openPopup : false
+            openPopup : false,
+            updatedList: this.props.list
         };
     };
 
@@ -78,75 +79,64 @@ class TaskList extends Component {
     handleChange = e => {
         this.globalFilter(e.target.value )
     }
-    
-    columns = [
-        {
-            Header:'No.',
-            sortable:true,
-            id: 'row',
-            Cell: (row) => {
-                return <div>{row.index + 1}</div>;
-            }
-        },
-        {
-            Header:'Task',
-            accessor:'title',
-            sortable:true
-        },
-        {
-            Header:'Date',
-            accessor:'date',
-            sortable:true
-        },
-        {
-            Header:'Time',
-            accessor:'time',
-            className: "thead-dark",
-            headerClassName: "thead-dark",
-            sortable:true,
-            Cell: (props) => {
-                //console.log(props)
-                return <div>{props.value === '1' ? props.value+ " Hour" : props.value+ " Hours"}</div>;
-            }
-        },
-        {
-            Header:'Actions',
-            accessor: "Action",
-            className: "td_action action-td",
-            filterable: false,
-            sortable:false,
-            headerClassName: "action-th",
-            Cell: ({index}) => (
-                <>
-                    <Link onClick={() => this.handleView(index)} to={`tasks/view/${index}`} className="btn btn-primary mr-2"><AiIcons.AiFillEye/></Link>
-                    <button onClick={() => this.handleEdit(index)} className="btn btn-warning mr-2"><FaIcons.FaEdit/></button>
-                    <button onClick={() => this.handleDelete(index)} className="btn btn-danger mr-2"><AiIcons.AiFillDelete/></button>  
-                </>
-            )
-        }
-    ]
 
-    apiData = this.props.list;
     componentDidUpdate(prevProps) {
+        //console.log(prevProps.currentIndex,this.props.currentIndex,prevProps.list.length,this.props.list.length,'compoennt did update')
         if (prevProps.currentIndex !== this.props.currentIndex || prevProps.list.length !== this.props.list.length) {
-            this.apiData = this.props.list;
+            this.setState({list: this.props.list })
         }
-    }
-
-    shouldComponentUpdate(prevProps, prevState){
-        if(prevProps.list || this.props.list 
-            !== prevProps.list){
-                this.apiData= this.props.list
-                return true;
-            }
-        return false;
-    }
-
-    closeModalHandler = () =>{
-        this.setState({openPopup: false});
     }
 
     render() {
+        var myTableData = this.state.list;
+
+        const columns = [
+            {
+                Header:'No.',
+                sortable:true,
+                id: 'row',
+                Cell: (row) => {
+                    return <div>{row.index + 1}</div>;
+                }
+            },
+            {
+                Header:'Task',
+                accessor:'title',
+                sortable:true
+            },
+            {
+                Header:'Date',
+                accessor:'date',
+                sortable:true
+            },
+            {
+                Header:'Time',
+                accessor:'time',
+                className: "thead-dark",
+                headerClassName: "thead-dark",
+                sortable:true,
+                Cell: (props) => {
+                    //console.log(props)
+                    return <div>{props.value === '1' ? props.value+ " Hour" : props.value+ " Hours"}</div>;
+                }
+            },
+            {
+                Header:'Actions',
+                accessor: "Action",
+                className: "td_action action-td",
+                filterable: false,
+                sortable:false,
+                headerClassName: "action-th",
+                Cell: ({index}) => (
+                    <>
+                        <Link onClick={() => this.handleView(index)} to={`tasks/view/${index}`} className="btn btn-primary mr-2"><AiIcons.AiFillEye/></Link>
+                        <button onClick={() => this.handleEdit(index)} className="btn btn-warning mr-2"><FaIcons.FaEdit/></button>
+                        <button onClick={() => this.handleDelete(index)} className="btn btn-danger mr-2"><AiIcons.AiFillDelete/></button>  
+                    </>
+                )
+            }
+        ]
+
         return (
             <>
                 {
@@ -167,11 +157,10 @@ class TaskList extends Component {
                         <AiIcons.AiOutlineSearch/>
                     </div>
                 </div>
-                
-                {console.log(this.props.list, this.apiData, this.state.list)}
-                <ReactTable
-                    data={this.props.list}  
-                    columns={this.columns} 
+
+                <ReactTable key={this.props.list.title}
+                    data={myTableData}  
+                    columns={columns} 
                     defaultPageSize={5} 
                     PaginationComponent={Pagination}
                 />
@@ -181,12 +170,11 @@ class TaskList extends Component {
 }
 
 //display data
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     console.log(state.CRUDReducer.list,"list")
     return {
         list: state.CRUDReducer.list,
         currentIndex: state.CRUDReducer.currentIndex,
-        ...state.CRUDReducer
     }
 }
 
