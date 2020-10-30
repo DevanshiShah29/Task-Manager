@@ -16,11 +16,10 @@ class TaskList extends Component {
         super(props)
         
         this.state = {
-            list:this.returnList(),
+            list:this.props.list,
             currentIndex:-1,
             selected :'',
-            openPopup : false,
-            updatedList: this.props.list
+            openPopup : false
         };
     };
 
@@ -79,6 +78,10 @@ class TaskList extends Component {
     handleChange = e => {
         this.globalFilter(e.target.value )
     }
+
+    closeModalHandler = () => {	
+        this.setState({ openPopup: false });	
+    };
 
     componentDidUpdate(prevProps) {
         //console.log(prevProps.currentIndex,this.props.currentIndex,prevProps.list.length,this.props.list.length,'compoennt did update')

@@ -24,12 +24,14 @@ const CRUDReducer = (state = initialState, action) => {
             if (window.confirm("Are you sure you want to delete this task?")) {
                 //state.list.splice(action.payload , 1)
                 console.log(action.payload, "delete reducer");
-                localStorage.setItem('tasksToken', JSON.stringify(state.list))
+                //localStorage.setItem('tasksToken', JSON.stringify(state.list))
                 //state.currentIndex = -1
-                return update(state, {
+                state = update( state, {
                     list: { $splice: [[action.payload, 1]] },
                     currentIndex: { $set: -1 }
                 });
+                localStorage.setItem('tasksToken', JSON.stringify(state.list))
+                return state
             } else {
                 localStorage.setItem('tasksToken', JSON.stringify(state.list))
                 state.currentIndex = -1

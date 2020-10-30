@@ -67,9 +67,6 @@ class TaskForm extends Component {
                             //value={this.props.selectedValue.title === '' ? this.state.title : this.props.selectedValue.title }
                             onChange={this.handleInputChange}
                             value={this.state.title}
-                            // validate={this.required}
-                            // label="Task:"
-                            // component={renderField}
                         />
                     </div>
                     <div className="form-group">
@@ -80,8 +77,6 @@ class TaskForm extends Component {
                             placeholder="Time Taken"
                             value={this.state.time}
                             onChange={this.handleInputChange}
-                            // validate={this.required}
-                            // component={renderField}
                         />
                     </div>
                     <div className="form-group">
@@ -92,8 +87,6 @@ class TaskForm extends Component {
                             placeholder="Date"
                             value={this.state.date}
                             onChange={this.handleInputChange}
-                            // validate={this.required}
-                            // component={renderField}
                         />
                     </div>
                     <div className="form-group">
@@ -103,9 +96,6 @@ class TaskForm extends Component {
                             placeholder="Select Category"
                             value={this.state.category}
                             onChange={this.handleInputChange}
-                            // validate={this.required}
-                            // component={renderField}
-                            //type="select"
                         >
                             <option value="">Select</option>
                             <option value="work">Work</option>
@@ -121,8 +111,6 @@ class TaskForm extends Component {
                             placeholder="Description"
                             value={this.state.description}
                             onChange={this.handleInputChange}
-                            // validate={this.required}
-                            // component={renderField}
                         />
                     </div>
 
