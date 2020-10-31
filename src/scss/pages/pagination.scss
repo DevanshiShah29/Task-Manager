@@ -1,11 +1,12 @@
 .pagination-bottom{
+    
     .Table__pagination{
         display: flex;
         justify-content: flex-end;
         padding: 8px 10px;
-        margin: 50px 20px 0 0;
+        margin: 20px 20px 20px 0;
         float: right;
-        background-color: $white;
+        background-color: $bright-white;
         border-radius: 20px;
 
         .previous-arrow, .next-arrow{
@@ -14,7 +15,7 @@
             color: $black;
             outline: none;
             border: none;
-            background:$white;
+            background:$bright-white;
             margin-top:-3px;
 
             &:disabled {
@@ -23,24 +24,24 @@
                 color: gray;
                 outline: none;
                 border: none;
-                background:$white;
+                background:$bright-white;
             }
         }
 
         button{
-            background-color: $white;
+            background-color: $bright-white;
             color: $black;
-            border-radius: 6px;
+            border-radius: 8px;
             margin: 5px;
             -webkit-transition: all 0.3s ease;
             transition: all 0.3s ease;
             padding: 2px 11px;
-            border:1px solid $white;
+            border:1px solid $bright-white;
             outline:none;
         }
 
         .Table__visiblePagesWrapper .Table__pageButton--active{
-            color: $white;
+            color: $bright-white;
             background-color:$purple;
             font-weight:500;
         }
