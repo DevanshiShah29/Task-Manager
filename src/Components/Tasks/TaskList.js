@@ -9,6 +9,7 @@ import Pagination from "../../Pagination";
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import Modal from 'react-modal';
+import CountUp from './CountUp';
 
 class TaskList extends Component {
     //In case of new transaction current index would be -1 otherwise it would be index of that data
@@ -142,6 +143,7 @@ class TaskList extends Component {
 
         return (
             <>
+                <CountUp/>
                 {
                     this.state.openPopup ? 
                     <Modal isOpen={true} onRequestClose={() => this.setState({ openPopup: false})} ariaHideApp={false}>
@@ -152,21 +154,23 @@ class TaskList extends Component {
                     </Modal>
                     :null
                 }
-                <div className="taskListHeader"> 
-                    <h2>Task List </h2>
-                    <button onClick={() => this.handlePopup()} className="button">Add Task</button> 
-                    <div className="search_container">
-                        <input onChange={this.handleChange} placeholder="Search" className="search" label="Search" type="search"/>
-                        <AiIcons.AiOutlineSearch/>
+                <div className="table-container">
+                    <div className="taskListHeader"> 
+                        <h2>Task List </h2>
+                        <button onClick={() => this.handlePopup()} className="button">Add Task</button> 
+                        <div className="search_container">
+                            <input onChange={this.handleChange} placeholder="Search" className="search" label="Search" type="search"/>
+                            <AiIcons.AiOutlineSearch/>
+                        </div>
                     </div>
-                </div>
 
-                <ReactTable key={this.props.list.title}
-                    data={myTableData}  
-                    columns={columns} 
-                    defaultPageSize={5} 
-                    PaginationComponent={Pagination}
-                />
+                    <ReactTable key={this.props.list.title}
+                        data={myTableData}  
+                        columns={columns} 
+                        defaultPageSize={5} 
+                        PaginationComponent={Pagination}
+                    />
+                </div>
             </>
         )
     }

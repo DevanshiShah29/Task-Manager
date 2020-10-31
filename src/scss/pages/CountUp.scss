@@ -1,0 +1,38 @@
+.count-container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:50px 30px;
+    border-radius: 20px;
+    background: $bright-white;
+    margin:30px 0;
+
+    .count{
+        width:20%;
+    }
+
+    h2{
+        font-weight:700;
+    }
+
+    .progress-bars{
+        margin:10px 0;
+
+        .bg-warning{
+            background-color: $purple !important;
+        }
+
+        .bg-info{
+            background-color: $blue !important;
+        }
+
+        .bg-success{
+            background-color: $green !important;
+        }
+
+        .bg-danger{
+            background-color: $pink !important;
+        }
+    }
+}
