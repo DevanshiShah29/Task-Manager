@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-//import { Field, reduxForm } from "redux-form";
-//import renderField from '../RenderField';
+// import { Field, reduxForm } from "redux-form";
+// import renderField from '../RenderField';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/TasksAction';
 
@@ -77,6 +77,8 @@ class TaskForm extends Component {
                             placeholder="Time Taken"
                             value={this.state.time}
                             onChange={this.handleInputChange}
+                            // validate={this.required}
+                            // component={renderField}
                         />
                     </div>
                     <div className="form-group">
