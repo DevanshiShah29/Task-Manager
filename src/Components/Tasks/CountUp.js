@@ -24,7 +24,7 @@ class CountUpComponent extends Component {
     otherProgress = (100 * this.otherTasks) / this.totalTasks;
 
     componentDidUpdate(prevProps) {
-        console.log(prevProps.currentIndex,this.props.currentIndex,prevProps.list.length,this.props.list.length,'compoennt did update')
+        //console.log(prevProps.currentIndex,this.props.currentIndex,prevProps.list.length,this.props.list.length,'compoennt did update')
         if (prevProps.currentIndex !== this.props.currentIndex || prevProps.list.length !== this.props.list.length) {
             this.setState({totalTasks: this.props.list.length })
         }
@@ -67,7 +67,7 @@ class CountUpComponent extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.CRUDReducer.list,"list count")
+    //console.log(state.CRUDReducer.list,"list count")
     return {
         list: state.CRUDReducer.list,
         currentIndex: state.CRUDReducer.currentIndex,

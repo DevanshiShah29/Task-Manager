@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-// import { Field, reduxForm } from "redux-form";
-// import renderField from '../RenderField';
+import { Field, reduxForm } from "redux-form";
+import renderField from '../RenderField';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/TasksAction';
 
@@ -28,7 +28,9 @@ class TaskForm extends Component {
     };
 
     componentDidUpdate(prevProps) {
+        //console.log(prevProps.currentIndex,this.props.currentIndex,prevProps.list.length,this.props.list.length,'compoennt did update')
         if (prevProps.currentIndex !== this.props.currentIndex || prevProps.list.length !== this.props.list.length) {
+            //console.log(prevProps.currentIndex,this.props.currentIndex,prevProps.list.length,this.props.list.length  )
             this.setState({ ...this.returnStateObject() })
         }
     }
@@ -70,15 +72,15 @@ class TaskForm extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <input
+                        <Field
                             name="time"
                             type="number"
                             className="form-control"
                             placeholder="Time Taken"
                             value={this.state.time}
                             onChange={this.handleInputChange}
-                            // validate={this.required}
-                            // component={renderField}
+                            validate={this.required}
+                            component={renderField}
                         />
                     </div>
                     <div className="form-group">
@@ -138,8 +140,8 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-// TaskForm = reduxForm({
-//     form: 'TaskEditAndAdd'
-// })(TaskForm)
+TaskForm = reduxForm({
+    form: 'TaskEditAndAdd'
+})(TaskForm)
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);
